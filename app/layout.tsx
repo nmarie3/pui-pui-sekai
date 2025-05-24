@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navi from "@/components/Home/Navi";
 import { ClerkProvider } from "@clerk/nextjs";
+import Footer from "@/components/Home/Footer";
+import StoreProvider from "@/StoreProvider/StoreProvider";
+import {Toaster} from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pui-Pui Sekai",
+  title: "Pui Pui Sekai",
   description: "モルモットグッズWEBショップ",
 };
 
@@ -25,6 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <StoreProvider>
     <ClerkProvider>
     <html lang="en">
       <body
@@ -32,8 +36,11 @@ export default function RootLayout({
       >
         <Navi/>
         {children}
+        <Toaster/>
+        <Footer/>
       </body>
     </html>
     </ClerkProvider>
+    </StoreProvider>
   );
 }
